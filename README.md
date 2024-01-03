@@ -15,7 +15,7 @@ Nesse desafio, você vai desenvolver uma aplicação que utilizará da API do Gi
   * React através do Vite com TypeScript, Axios, react-hook-form, entre outras bibliotecas.
  
 ## Github API
-- Ver as instrucoes no Post Oficial
+- Veja as instrucoes no Post Oficial
 - https://efficient-sloth-d85.notion.site/Desafio-03-Github-Blog-13593953670346908462ddc648d42cf1
 
 ## Layout
