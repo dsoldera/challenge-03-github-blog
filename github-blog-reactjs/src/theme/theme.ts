@@ -13,4 +13,21 @@ export const defaultTheme = {
     baseBackground: '#071422',
     baseInput: '#040F1A',
   },
+  fontSize: {
+    'titleL': '24px',
+    'titleM': '20px',
+    'titleS': '18px',
+    'textM': '16px',
+    'textS': '14px',
+  },
+  link: {
+    'font-size': '12px',
+    'color': '#3294F8',
+    'text-decoration': 'none',
+  },
+  svg: {
+    'height': '1.125rem',
+    'width': 'auto',
+    'color': '#3A536B',
+  }
 }
