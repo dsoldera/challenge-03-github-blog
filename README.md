@@ -4,15 +4,15 @@ Desafio 03 - Github Blog react App
 ## Descricao
 Nesse desafio, você vai desenvolver uma aplicação que utilizará da API do GitHub para buscar issues de um repositório, dados do seu perfil e exibir elas como um blog.
 
-- Listagem do seu perfil com imagem, número de seguidores, nome e outras informações disponíveis pela API do GitHub.
-- Listar e filtrar todas as issues do repositório com um pequeno resumo do conteúdo dela
-- Criar uma página para exibir um post (issue) completo
+- [x] Listagem do seu perfil com imagem, número de seguidores, nome e outras informações disponíveis pela API do GitHub.
+- [] Listar e filtrar todas as issues do repositório com um pequeno resumo do conteúdo dela
+- [] Criar uma página para exibir um post (issue) completo
 
 - Utilizar:
-  * Fetch / Axios
-  * Roteamento e React Router DOM
-  * Formulários
-  * React através do Vite com TypeScript, Axios, react-hook-form, entre outras bibliotecas.
+  * [x] Fetch / Axios
+  * [x] Roteamento e React Router DOM
+  * [] Formulários
+  * [x] React através do Vite com TypeScript, Axios, react-hook-form, entre outras bibliotecas.
 
 ## Desenvolvendo o projeto
 
@@ -41,6 +41,7 @@ Você pode ver mais sobre a busca de issues na API do GitHub por aqui: https://d
 Um exemplo de chamada à API com busca é a seguinte: [`https://api.github.com/search/issues?q=Boas%20práticas%20repo:rocketseat-education/reactjs-github-blog-challenge`](https://api.github.com/search/issues?q=Boas%20pr%C3%A1ticas%20repo:rocketseat-education/reactjs-github-blog-challenge)
 
 PS: Perceba que nessa busca, no parâmetro `q` foi passado a string `Boas%20práticas` e também o nome do repositório com um espaço do título. Isso irá buscar entre as issues qualquer uma que possua o texto `boas práticas` em seu título ou até descrição.
+
 - [GitHub Issues API:](https://docs.github.com/pt/rest/issues/issues#get-an-issue) Para exibir o post completo, você precisará utilizar a `GitHub Issues API` para retornar todos os dados de uma issue. Você pode fazer isso através do `number` da issue para acessá-la através da URL no mesmo repositório, onde no mesmo exemplo de issue anterior, a URL ficaria assim: [`https://api.github.com/repos/rocketseat-education/reactjs-github-blog-challenge/issues/1`](https://api.github.com/repos/rocketseat-education/reactjs-github-blog-challenge/issues/1)
 
 ```
