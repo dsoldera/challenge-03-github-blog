@@ -13,5 +13,38 @@ export function useGithub() {
     (context) => {
       return context.repoChallenge
   })
-  return { githubUser, githubRepo }
+
+  const githubPostDataFn = useContextSelector(
+    GithubContext,
+    (context) => {
+      return context.getIssueDataFn
+  })
+
+  const githubPosts = useContextSelector(
+    GithubContext,
+    (context) => {
+      return context.issues
+  })
+
+  const githubPost = useContextSelector(
+    GithubContext,
+    (context) => {
+      return context.issue
+  })
+
+  const githubSearchPost = useContextSelector(
+    GithubContext,
+    (context) => {
+      return context.searchIssueDataFn
+    }
+  )
+
+  return {
+    githubPost,
+    githubUser, 
+    githubRepo,
+    githubSearchPost,
+    githubPostDataFn, 
+    githubPosts
+  }
 }

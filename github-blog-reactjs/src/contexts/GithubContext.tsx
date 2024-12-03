@@ -3,7 +3,7 @@ import api from '@/lib/axios'
 import { useCallback, useEffect, useState } from 'react'
 import { createContext } from 'use-context-selector'
 
-export interface UserGithub {
+export interface UserGithubProps {
   login: string
   id: number
   type: string
@@ -24,7 +24,8 @@ export interface UserGithub {
   repos_url: string
   html_url: string
 }
-interface ChallengeRepo {
+
+interface ChallengeRepoProps {
   id: number
   name: string
   full_name: string
@@ -34,12 +35,32 @@ interface ChallengeRepo {
   open_issues_count: number
 }
 
-interface GithubContextType {
-  userGit?: UserGithub;
-  repoChallenge?: ChallengeRepo;
-  // getUserFn: (login: string) => Promise<void>;
-  // getRepoFn: (repo: string, login: string) => Promise<void>;
+interface IssuesProps {
+  total_count: number;
+  incomplete_results: boolean;
+  items: IssueItemProps[];
 }
+
+interface IssueItemProps {
+  title: string
+  id: number
+  body: string
+  html_url: string
+  created_at: string
+  number: number
+  comments: number
+}
+
+interface GithubContextType {
+  userGit?: UserGithubProps
+  repoChallenge?: ChallengeRepoProps
+  issue?: IssueItemProps
+  issues?: IssuesProps
+  getIssueDataFn: (number: number) => Promise<void>
+  getAllIssuesFn: () => Promise<void>
+  searchIssueDataFn: (query?: string ) => Promise<void>
+}
+
 
 interface GithubProviderProps {
   children: React.ReactNode;  
@@ -48,37 +69,74 @@ interface GithubProviderProps {
 export const GithubContext = createContext({} as GithubContextType);
  
 export const GithubProvider = ({ children }: GithubProviderProps) => {
-  const [userGit, setUserGit] = useState<UserGithub>();
-  const [repoChallenge, setRepoChallenge] = useState<ChallengeRepo>();
+  const [userGit, setUserGit] = useState<UserGithubProps>();
+  const [repoChallenge, setRepoChallenge] = useState<ChallengeRepoProps>();
+  const [issue, setIssue] = useState<IssueItemProps>();
+  const [issues, setIssues] = useState<IssuesProps>();
+  const login: string = 'dsoldera';
+  const repo: string = 'challenge-03-github-blog';
   
   const getUserFn = useCallback(
-    async (login: string) => {
-      const response = await api.get<UserGithub>(`/users/${login}`)
+    async () => {
+      const response = await api.get(`/users/${login}`)
       //console.log('login', response.data)
       setUserGit(response.data)
     },[],
   )
 
   const getRepoFn = useCallback(
-    async (repo: string, login: string) => {
-      const response = await api.get<ChallengeRepo>(`/repos/${login}/${repo}`)
+    async () => {
+      const response = await api.get(`/repos/${login}/${repo}`)
       //console.log('repo', response.data)
       setRepoChallenge(response.data)
     },[],
   )
+
+  const getAllIssuesFn = useCallback(
+    async () => {
+    const response = await api.get('search/issues', {
+      params: {
+        q: `repo:${login}/${repo}`,
+      },
+    });
+    //console.log('issues', response.data)
+    setIssues(response.data);
+  }, []);
+
+  const getIssueDataFn = useCallback(
+    async (number: number) => {
+      const response = await api
+        .get(`/repos/${login}/${repo}/issues/${number}`)
+        console.log('post', response.data)
+        setIssue(response.data)
+    }, [],
+  )
+
+  const searchIssueDataFn = useCallback(
+    async(query?: string) => {
+      const response = await api
+      .get(`/search/issues?q=${query}%20repo:${login}/${repo}`);
+      console.log('search', response.data)
+      setIssues(response.data);
+    }, [],
+  )
   
   useEffect(() => {
-    const login = 'dsoldera'
-    const repo = 'challenge-03-github-blog'
-    getUserFn(login)
-    getRepoFn(repo, login)
+    getUserFn();
+    getRepoFn();
+    getAllIssuesFn();
   }, [getUserFn, getRepoFn]);
 
   return(
     <GithubContext.Provider 
       value={{ 
         userGit,
-        repoChallenge
+        issue,
+        repoChallenge,
+        getIssueDataFn,
+        searchIssueDataFn,
+        getAllIssuesFn,
+        issues
       }}>
       {children}
     </GithubContext.Provider>
