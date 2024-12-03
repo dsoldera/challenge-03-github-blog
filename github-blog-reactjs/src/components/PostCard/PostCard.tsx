@@ -1,4 +1,5 @@
 import { formatDistanceToNow } from "date-fns";
+import { ptBR } from 'date-fns/locale';
 import { Body, Card, Title } from "./styles";
 
 export interface CardProps {
@@ -16,12 +17,15 @@ export const PostCard = ({ id, title, body, number, created_at}: CardProps) => {
   return (
     <Card key={id}>
       <a href={`/post/${number}`}>
-        <Title>{title}</Title>
-        <span>
-          {formatDistanceToNow(String(created_at), {
-            addSuffix: true
-          })}
-        </span>
+        <div>
+          <Title>{title}</Title>
+          <span>
+            {formatDistanceToNow(String(created_at), {
+              addSuffix: true,
+              locale: ptBR,
+            })}
+          </span>
+        </div>
         <Body>
           { cuttedText }...
         </Body>

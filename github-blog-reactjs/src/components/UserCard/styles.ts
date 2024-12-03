@@ -10,6 +10,7 @@ export const Container = styled.div`
   padding: 32px 40px;
   margin: 0 auto;
   margin-top: -92px;
+  margin-bottom: 72px;
 `
 export const UserCardInfo = styled.div`
   display: flex;
@@ -40,6 +41,9 @@ export const UserGithubLink = styled.a`
 export const UserCardName = styled.div`
   color: ${({theme}) => theme.colors.baseTitle};
   font-size: ${({theme}) => theme.fontSize.titleL};
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
 `
 
 export const UserCardBio = styled.div`
@@ -50,7 +54,15 @@ export const UserCardBio = styled.div`
 export const UserCardSocial = styled.div`
   color: ${({theme}) => theme.colors.baseSubtitle};
   font-size: ${({theme}) => theme.fontSize.textM};
+  align-content: flex-end;
+  flex: auto;
+
+  span {
+    margin-right: 24px;
+  }
+
   svg {
     ${({theme}) => theme.svg};
+    margin-right: 8px;
   }
 `

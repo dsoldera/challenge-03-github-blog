@@ -41,12 +41,13 @@ interface IssuesProps {
   items: IssueItemProps[];
 }
 
-interface IssueItemProps {
+export interface IssueItemProps {
   title: string
   id: number
   body: string
   html_url: string
   created_at: string
+  updated_at: string
   number: number
   comments: number
 }

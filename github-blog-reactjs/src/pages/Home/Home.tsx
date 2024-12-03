@@ -44,8 +44,10 @@ export const HomePage = () => {
       <Header />
       <UserCard />
       <div style={{ width: '864px', margin: '0 auto'}}>
-        <h2>Publicações</h2>
-        <p>{ githubPosts?.total_count} publicações</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
+          <h2>Publicações</h2>
+          <p>{ githubPosts?.total_count} publicações</p>
+        </div>
 
         <form onSubmit={handleSubmit(handleSearchPosts)}>
           <Input 
